@@ -1,73 +1,117 @@
-# React + TypeScript + Vite
+# 🎨 Referral & Reward System – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the **frontend application** for the **Referral & Reward System**, built using **React + TypeScript**.
 
-Currently, two official plugins are available:
+It provides:
+- User authentication
+- User dashboard
+- Admin dashboard with reports, leaderboard, and payouts
+- CSV & PDF export support
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 👤 Authentication
+- Login & Signup
+- JWT-based authentication
+- Refresh-token handling via Axios interceptors
+- Logout support
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 👥 User Dashboard
+- View user details
+- View referral code (copyable)
+- View total referrals
+- View total earnings
+- Works for both **NORMAL** and **OMNI** users
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 🧑‍💼 Admin Panel  
+*(Admin-only access)*
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+#### 📊 Referral Commission Report
+- Search by name or email
+- Filter by:
+  - User type (NORMAL / OMNI)
+  - Minimum earnings
+- Pagination
+- Export reports:
+  - CSV
+  - PDF
+
+---
+
+#### 🏆 Leaderboard
+- Displays top referrers
+- Sorted by total earnings
+- Shows rank, referrals, and earnings
+
+---
+
+#### 💸 Payout Management
+- View users with pending payouts
+- Process payouts
+- Real-time UI update after payout
+
+---
+
+## 🛠 Tech Stack
+- React
+- TypeScript
+- React Router
+- Axios
+- Tailwind CSS
+- Zod
+- React Hook Form
+
+---
+
+## 🔐 Routing Overview
+
+### Public Routes
+- `/login`
+- `/signup`
+
+### User Routes
+- `/dashboard`
+
+### Admin Routes
+- `/admin/referral-report`
+- `/admin/payouts`
+- `/admin/leaderboard`
+
+Routes are protected using:
+- **ProtectedRoute** → authenticated users
+- **AdminRoute** → admin-only access
+
+---
+
+## 🔌 API Integration
+
+The frontend communicates with backend APIs using a **centralized Axios instance**.
+
+### Axios Features
+- Automatically attaches access token
+- Refreshes token on `401 Unauthorized`
+- Redirects to login on session expiry
+
+---
+
+Make sure the backend is running on the same base URL.
+
+---
+
+## ▶️ Running the Frontend
+
+### Install Dependencies
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Start Development Server
+```bash
+npm run dev
 ```
