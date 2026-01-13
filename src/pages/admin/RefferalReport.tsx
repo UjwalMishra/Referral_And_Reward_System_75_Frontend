@@ -170,10 +170,6 @@ const ReferralReport = () => {
           Prev
         </button>
 
-        <span className="text-sm">
-          Page {page} of {totalPages}
-        </span>
-
         <button
           disabled={page === totalPages}
           onClick={() => setPage((p) => p + 1)}
